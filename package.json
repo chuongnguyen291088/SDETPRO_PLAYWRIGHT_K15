@@ -1,0 +1,15 @@
+{
+  "name": "sdetpro_playwright_k15",
+  "version": "1.0.0",
+  "description": "PlayWright, Build Web Automation Test Framework With NodeJS + TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "chuong nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
