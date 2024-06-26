@@ -4,11 +4,10 @@
  * npm i readline-sync
  */
 
-const readline = require("readline-sync");
 let height, weight;
-height = Number(readline.question('Please input your heigh (m)  '));
+height = getValidationValue('Please input your heigh (m) ');
 printOutNumber(height);
-weight = Number(readline.question('Please input your weight (kg)  '));
+weight = getValidationValue('Please input your weight (kg) ');
 printOutNumber(weight);
 
 const BMI = (weight / (height * 2)).toFixed(1);
@@ -27,11 +26,43 @@ if (BMI < underweight) {
     console.log(`You're obesity. You should decrease the weight!`);
 };
 
-function printOutNumber(number) {
-    const result = number % 2;
-    if (result !== 0) {
-        console.log(`[INFO] This is the odd number`);
+
+function getInputValue(message) {
+    const readline = require("readline-sync");
+    return Number(readline.question(message).trim());
+};
+
+function isNumber(value) {
+    if (!isNaN(value) && typeof value === 'number' && value != 0) {
+        return true;
     } else {
-        console.log(`[INFO] This is the even number`);
-    };
+        return false;
+    }
+}
+
+function getValidationValue(message) {
+    let flag = false,
+        inputValue;
+
+    while (!flag) {
+        inputValue = getInputValue(message);
+        if (isNumber(inputValue)) {
+            return inputValue;
+        } else {
+            console.log(`Invalid value. Please input valid values: \n.Number \n.Not blank \n.Not equal 0`);
+        }
+    }
+}
+
+function printOutNumber(number) {
+    if (isNumber(number)) {
+        const result = number % 2;
+        if (result !== 0) {
+            console.log(`[INFO] This is the odd number`);
+        } else {
+            console.log(`[INFO] This is the even number`);
+        };
+    } else {
+        console.log(`[INFO] This is not the number`);
+    }
 };
