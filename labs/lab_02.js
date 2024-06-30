@@ -5,27 +5,26 @@
  */
 
 let height, weight;
-height = getValidationValue('Please input your heigh (m) ');
+height = getValidationValue('Please input your height (m) ');
 printOutNumber(height);
 weight = getValidationValue('Please input your weight (kg) ');
 printOutNumber(weight);
 
-const BMI = (weight / (height * 2)).toFixed(1);
-underweight = 18.5
-overweight = 25
-obesity = 30;
+const BMI = (weight / (height ** 2)).toFixed(1),
+    underweight = 18.5,
+    overweight = 25,
+    obesity = 30;
 
 console.log(`[INFO] Your BMI ${BMI}`);
 if (BMI < underweight) {
-    console.log(`You're underweight. You should increase the weight!`);
+    console.log(`You're underweight. You should increase ${transfromToWeight(BMI, height)} kg!`);
 } else if (BMI < overweight) {
     console.log(`You're normal weight. Keep up the good work!`);
 } else if (BMI < obesity) {
-    console.log(`You're overweight. You should decrease the weight!`);
+    console.log(`You're overweight. You should decrease ${transfromToWeight(BMI, height)} kg!`);
 } else {
-    console.log(`You're obesity. You should decrease the weight!`);
+    console.log(`You're obesity. You should decrease ${transfromToWeight(BMI, height)} kg!`);
 };
-
 
 function getInputValue(message) {
     const readline = require("readline-sync");
@@ -38,7 +37,7 @@ function isNumber(value) {
     } else {
         return false;
     }
-}
+};
 
 function getValidationValue(message) {
     let flag = false,
@@ -52,7 +51,16 @@ function getValidationValue(message) {
             console.log(`Invalid value. Please input valid values: \n.Number \n.Not blank \n.Not equal 0`);
         }
     }
-}
+};
+
+function transfromToWeight(BMI, height) {
+    if (BMI < underweight) {
+        BMI = underweight - BMI;
+    } else {
+        BMI = BMI - (overweight - 0.1);
+    }
+    return (BMI * (height ** 2)).toFixed(1);
+};
 
 function printOutNumber(number) {
     if (isNumber(number)) {
