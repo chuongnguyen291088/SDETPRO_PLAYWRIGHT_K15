@@ -17,13 +17,13 @@ const BMI = (weight / (height ** 2)).toFixed(1),
 
 console.log(`[INFO] Your BMI ${BMI}`);
 if (BMI < underweight) {
-    console.log(`You're underweight. You should increase ${transfromToWeight(BMI, height)} kg!`);
+    console.log(`You're underweight. You should increase ${transformToWeight(BMI, weight, height)} kg!`);
 } else if (BMI < overweight) {
     console.log(`You're normal weight. Keep up the good work!`);
 } else if (BMI < obesity) {
-    console.log(`You're overweight. You should decrease ${transfromToWeight(BMI, height)} kg!`);
+    console.log(`You're overweight. You should decrease ${transformToWeight(BMI, weight, height)} kg!`);
 } else {
-    console.log(`You're obesity. You should decrease ${transfromToWeight(BMI, height)} kg!`);
+    console.log(`You're obesity. You should decrease ${transformToWeight(BMI, weight, height)} kg!`);
 };
 
 function getInputValue(message) {
@@ -53,13 +53,25 @@ function getValidationValue(message) {
     }
 };
 
-function transfromToWeight(BMI, height) {
+/** 
+function transformToWeight(BMI, height) {
     if (BMI < underweight) {
         BMI = underweight - BMI;
     } else {
         BMI = BMI - (overweight - 0.1);
     }
     return (BMI * (height ** 2)).toFixed(1);
+};
+*/
+
+function transformToWeight(BMI, weight, height) {
+    let minWeight = (underweight * (height ** 2));
+    let maxWeight = ((overweight - 0.1) * (height ** 2));
+    if (BMI < underweight) {
+        return (minWeight - weight).toFixed(1);
+    } else {
+        return (weight - maxWeight).toFixed(1);
+    }
 };
 
 function printOutNumber(number) {
