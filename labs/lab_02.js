@@ -4,6 +4,10 @@
  * npm i readline-sync
  */
 
+const inputNumberUtil = require('../labUtils/inputNumberUtil');
+const getValidationValue = inputNumberUtil.getValidationValue;
+const printOutNumber = inputNumberUtil.printOutNumber;
+
 let height, weight;
 height = getValidationValue('Please input your height (m) ');
 printOutNumber(height);
@@ -26,33 +30,6 @@ if (BMI < underweight) {
     console.log(`You're obesity. You should decrease ${transformToWeight(BMI, weight, height)} kg!`);
 };
 
-function getInputValue(message) {
-    const readline = require("readline-sync");
-    return Number(readline.question(message).trim());
-};
-
-function isNumber(value) {
-    if (!isNaN(value) && typeof value === 'number' && value != 0) {
-        return true;
-    } else {
-        return false;
-    }
-};
-
-function getValidationValue(message) {
-    let flag = false,
-        inputValue;
-
-    while (!flag) {
-        inputValue = getInputValue(message);
-        if (isNumber(inputValue)) {
-            return inputValue;
-        } else {
-            console.log(`Invalid value. Please input valid values: \n.Number \n.Not blank \n.Not equal 0`);
-        }
-    }
-};
-
 /** 
 function transformToWeight(BMI, height) {
     if (BMI < underweight) {
@@ -71,18 +48,5 @@ function transformToWeight(BMI, weight, height) {
         return (minWeight - weight).toFixed(1);
     } else {
         return (weight - maxWeight).toFixed(1);
-    }
-};
-
-function printOutNumber(number) {
-    if (isNumber(number)) {
-        const result = number % 2;
-        if (result !== 0) {
-            console.log(`[INFO] This is the odd number`);
-        } else {
-            console.log(`[INFO] This is the even number`);
-        };
-    } else {
-        console.log(`[INFO] This is not the number`);
     }
 };
