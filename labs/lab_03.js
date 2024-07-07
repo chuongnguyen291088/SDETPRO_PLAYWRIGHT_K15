@@ -1,6 +1,6 @@
-const inputNumberUtil = require('../labUtils/inputNumberUtil');
-const getValidationValue = inputNumberUtil.getValidationValue;
-const printOutNumber = inputNumberUtil.printOutNumber;
+const inputUtil = require('../labUtils/inputUtil');
+const getValidationValue = inputUtil.getValidationValue;
+const printOutNumber = inputUtil.printOutNumber;
 
 
 // lab 3.1
@@ -16,7 +16,8 @@ console.log(`Sorted list \[${sortedList.toString()}\]`);
 // lab 3.4
 const secondList = collectNumbers();
 console.log(`Second list \[${secondList}\]`);
-const thirdList = firstList.concat(secondList);
+
+const thirdList = sortedList.concat(secondList);
 console.log(`Third list \[${thirdList}\]`);
 const thirdListIsSorted = sortTheList(thirdList)
 console.log(`Third list is sorted \[${thirdListIsSorted}\]`);
