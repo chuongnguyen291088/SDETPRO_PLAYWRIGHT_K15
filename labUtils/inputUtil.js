@@ -17,6 +17,11 @@ function getInputValue(message) {
     return Number(readline.question(message).trim());
 };
 
+function getRawInputValue(message) {
+    const readline = require("readline-sync");
+    return readline.question(message).trim();
+};
+
 function isNumber(value) {
     if (!isNaN(value) && typeof value === 'number' && value != 0) {
         return true;
@@ -38,4 +43,4 @@ function printOutNumber(number) {
     }
 };
 
- module.exports = {getValidationValue, printOutNumber, getInputValue};
+ module.exports = {getValidationValue, printOutNumber, getInputValue, getRawInputValue};
