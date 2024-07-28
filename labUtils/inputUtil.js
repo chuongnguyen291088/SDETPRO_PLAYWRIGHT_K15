@@ -1,3 +1,6 @@
+
+const readline = require("readline-sync");
+
 function getValidationValue(message) {
     let flag = false,
         inputValue;
@@ -7,23 +10,21 @@ function getValidationValue(message) {
         if (isNumber(inputValue)) {
             return inputValue;
         } else {
-            console.log(`Invalid value. Please input valid values: \n.Number \n.Not blank \n.Not equal 0`);
+            console.log(`\n[ERROR] Invalid value. Please input valid values: \n1. Number \n2. Not blank \n3. Greater than or equal 0`);
         }
     }
 };
 
 function getInputValue(message) {
-    const readline = require("readline-sync");
     return Number(readline.question(message).trim());
 };
 
 function getRawInputValue(message) {
-    const readline = require("readline-sync");
     return readline.question(message).trim();
 };
 
 function isNumber(value) {
-    if (!isNaN(value) && typeof value === 'number' && value != 0) {
+    if (!isNaN(value) && typeof value === 'number' && value >= 0) {
         return true;
     } else {
         return false;
@@ -39,8 +40,16 @@ function printOutNumber(number) {
             console.log(`[INFO] This is the even number`);
         };
     } else {
-        console.log(`[INFO] This is not the number`);
+        console.log(`[ERROR] This is not the number`);
     }
 };
 
- module.exports = {getValidationValue, printOutNumber, getInputValue, getRawInputValue};
+function getUserInput(isNumber, message) {
+    if (isNumber) {
+        return getValidationValue(message);
+    } else {
+        return getRawInputValue(message);
+    }
+};
+
+module.exports = { getValidationValue, printOutNumber, getInputValue, getRawInputValue, getUserInput };

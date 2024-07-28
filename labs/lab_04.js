@@ -1,4 +1,4 @@
-const input = require("../labUtils/inputUtil").getRawInputValue;
+const input = require("../labUtils/inputUtil").getUserInput;
 
 const aAccount = new originalObject("John", "40720000190", "7858885234", 5000000);
 const bAccount = new originalObject("Peter", "40720000192", "2367941577", 50000000)
@@ -14,26 +14,26 @@ function originalObject(name, accountNumber, routingNumber, balance) {
   this.name = name;
   this.accountNumber = accountNumber;
   this.routingNumber = routingNumber;
-  this.balance = balance; 2
+  this.balance = balance;
 };
 
 function bankingApplication(accounts) {
   let option = selectOption();
-  while (option != 0) {
+  while (option !== 0) {
     let account = findAccount(accounts);
-    if (option == 1) {
+    if (option === 1) {
       if (account === null) {
-        console.log(`\n[INFO] Your account is not existing. Please try again`);
+        console.log(`\n[ERROR] Your account is not existing. Please try again`);
       } else {
         console.log(`\n[INFO] Account name: ${account.name} \nAccount balance: ${account.balance}`);
         option = selectOption();
       }
-    } else if (option == 2) {
+    } else if (option === 2) {
       if (account !== null) {
         updateBalance(account)
         option = selectOption();
       } else {
-        console.log(`\n[INFO] Your account is not existing. Please try again`);
+        console.log(`\n[ERROR] Your account is not existing. Please try again`);
       }
     }
   }
@@ -44,11 +44,20 @@ function selectOption() {
   console.log("1. Find an account");
   console.log("2. Update balance");
   console.log("0. Exit the program");
-  return input("Please select an option: ")
+  let flag = false;
+  do {
+    let option = input(true, "Please select an option: ");
+    if (option <= 2) {
+      flag = true;
+      return option;
+    } else {
+      console.log(`\n[ERROR] Invalid option. Please try again`);
+    }
+  } while (!flag);
 };
 
 function findAccount(accounts) {
-  let expectedAccountNumber = input("\nPlease input account number: "),
+  let expectedAccountNumber = input(false, "\nPlease input account number: "),
     accountNumbers = [];
   for (let i = 0; i < accounts.length; i++) {
     let actualAccountNumber = accounts[i].accountNumber
@@ -66,22 +75,33 @@ function updateBalance(account) {
   console.log(`\n[INFO] Account name: ${account.name} \nAccount balance: ${account.balance}`);
   console.log("1. Deposit");
   console.log("2. Withdraw");
-  let option = input("Please select an option: "),
-    amount = Number(input("Please input amount of money: ")),
+  let flag = false,
+  option;
+  
+  while (!flag) {
+    option = input(true, "Please select an option: ");
+    if (option <= 2 && option !== 0) {
+      flag = true;
+    } else {
+      console.log(`\n[ERROR] Invalid option. Please try again`);
+    }
+  }
+
+  let amount = input(true, "Please input amount of money: "),
     currentBalance = account.balance,
     newBalance;
 
   switch (option) {
-    case "1":
+    case 1:
       newBalance = currentBalance + amount;
       account.balance = newBalance;
       break;
-    case "2":
+    case 2:
       if (amount <= currentBalance) {
         newBalance = currentBalance - amount;
         account.balance = newBalance;
       } else {
-        console.log(`\n[INFO] You're unable to withdraw an amount of money > ${currentBalance}`);
+        console.log(`\n[ERROR] You're unable to withdraw an amount of money > ${currentBalance}`);
       }
       break;
   }
