@@ -1,4 +1,5 @@
-const {getValidationValue, printOutNumber} = require("../labUtils/inputUtil");
+const { getValidationValue, printOutNumber } = require("../labUtils/inputUtil");
+const { getEvenNumber, getOddNumber } = require("../labUtils/arrayHelper");
 
 // lab 3.1
 const firstList = collectNumbers();
@@ -40,7 +41,10 @@ function collectNumbers() {
   return arrList;
 }
 
-// get even/odd numbers
+// * get even/odd numbers
+// * first way
+/**
+ * 
 function showTypeOfNumbersInTheList(arrList) {
   const evenNumbers = [];
   const oddNumbers = [];
@@ -52,6 +56,21 @@ function showTypeOfNumbersInTheList(arrList) {
       oddNumbers.push(arrList[i]);
     }
   }
+  console.log(
+    `Even numbers in the list are ${evenNumbers.length
+    }: \[${evenNumbers.toString()}\]`
+  );
+  console.log(
+    `Odd numbers in the list are ${oddNumbers.length
+    }: \[${oddNumbers.toString()}\]`
+  );
+} 
+ */
+
+// * second way
+function showTypeOfNumbersInTheList(arrList) {
+  let evenNumbers = arrList.filter(getEvenNumber);
+  let oddNumbers = arrList.filter(getOddNumber);
   console.log(
     `Even numbers in the list are ${evenNumbers.length
     }: \[${evenNumbers.toString()}\]`
@@ -83,12 +102,12 @@ function getMaxNumberInTheList(arrList) {
 }
 // * #3
 function getMinMaxNumber(arrList) {
-  let minNum = arrList[0], 
-  maxNum = arrList[0];
-  
+  let minNum = arrList[0],
+    maxNum = arrList[0];
+
   for (let i = 0; i < arrList.length; i++) {
     if (arrList[i] > maxNum) {
-       maxNum = arrList[i];
+      maxNum = arrList[i];
     } else if (arrList[i] < minNum) {
       minNum = arrList[i];
     }
