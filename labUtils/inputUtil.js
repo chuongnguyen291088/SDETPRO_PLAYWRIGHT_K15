@@ -10,7 +10,7 @@ function getValidationValue(message) {
         if (isNumber(inputValue)) {
             return inputValue;
         } else {
-            console.log(`\n[ERROR] Invalid value. Please input valid values: \n1. Number \n2. Not blank \n3. Greater than or equal 0`);
+            console.error(`\n[ERROR] Invalid value. Please input valid values: \n1. Number \n2. Not blank \n3. Greater than or equal 0`);
         }
     }
 };
@@ -40,7 +40,7 @@ function printOutNumber(number) {
             console.log(`[INFO] This is the even number`);
         };
     } else {
-        console.log(`[ERROR] This is not the number`);
+        console.error(`[ERROR] This is not the number`);
     }
 };
 
