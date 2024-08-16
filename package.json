@@ -4,12 +4,16 @@
   "description": "PlayWright, Build Web Automation Test Framework With NodeJS + TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "chuong nguyen",
   "license": "ISC",
   "dependencies": {
+    "allure-mocha": "^3.0.0-beta.10",
+    "axios": "^1.1.3",
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0",
     "readline-sync": "^1.4.10"
   }
 }

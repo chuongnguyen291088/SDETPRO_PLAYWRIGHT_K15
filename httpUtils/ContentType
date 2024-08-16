@@ -1,0 +1,3 @@
+const JSON = {'Content-type': 'application/json; charset=UTF-8'};
+
+module.exports = {JSON};
