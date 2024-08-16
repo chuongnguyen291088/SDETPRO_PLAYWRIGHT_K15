@@ -3,18 +3,18 @@ const { JSON } = require('../httpUtils/ContentType');
 const { isLastResponseCodeCorrect, isPostIdCorrect } = require('../labSteps/labVerification/verifyLastResponseCode');
 const {getUserInput} = require('../labUtils/inputUtil');
 
-// describe('Json Placeholder', () => {
-//     it('should be able to get post by id', async () => {
-//         const postId = getUserInput(true, "Please input postId: ");
-//         const url = `https://jsonplaceholder.typicode.com/posts/${postId}`;
-//         const response = await fetch(url, {
-//             header: JSON
-//         });
-//         const data = await response.json();
-//         isLastResponseCodeCorrect(response, 200);
-//         isPostIdCorrect(data, postId);
-//     });
-// });
+describe('Json Placeholder', () => {
+    it('should be able to get post by id', async () => {
+        const postId = getUserInput(true, "Please input postId: ");
+        const url = `https://jsonplaceholder.typicode.com/posts/${postId}`;
+        const response = await fetch(url, {
+            header: JSON
+        });
+        const data = await response.json();
+        isLastResponseCodeCorrect(response, 200);
+        isPostIdCorrect(data, postId);
+    });
+});
 
 describe('Json Placeholder', () => {
     it('should be able to get all posts', async() => {
